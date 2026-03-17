@@ -161,7 +161,6 @@ dist
 
 # Stores VSCode versions used for testing VSCode extensions
 
-.vscode-test
 
 # yarn v2
 
@@ -195,3 +194,5 @@ token.json
 credentials.json
 
 screenshot.jpg
+temp_auto_push.bat
+temp_interactive_push.bat

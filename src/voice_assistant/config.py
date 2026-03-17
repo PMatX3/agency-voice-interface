@@ -41,3 +41,6 @@ if MISSING_VARS:
 
 SCRATCH_PAD_DIR = os.getenv("SCRATCH_PAD_DIR", "./scratchpad")
 os.makedirs(SCRATCH_PAD_DIR, exist_ok=True)
+
+# AIOS Workspace directory (optional, enables workspace tools)
+WORKSPACE_DIR = os.getenv("WORKSPACE_DIR", "")
