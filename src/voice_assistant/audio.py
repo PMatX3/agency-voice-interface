@@ -30,6 +30,14 @@ class AudioPlayer:
         # Allow other tasks to run
         await asyncio.sleep(0)
 
+    async def stop_playback_immediate(self, visual_interface):
+        """Stop playback immediately for barge-in interruption."""
+        if self.is_playing:
+            self.stream.stop_stream()
+            self.is_playing = False
+            visual_interface.set_assistant_speaking(False)
+            logger.info("Audio playback interrupted by user")
+
     async def stop_playback(self, visual_interface):
         if self.is_playing:
             # Add a small delay of silence at the end

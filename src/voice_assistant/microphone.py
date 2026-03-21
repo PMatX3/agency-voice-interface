@@ -27,7 +27,7 @@ class AsyncMicrophone:
         logger.info("AsyncMicrophone initialized")
 
     def callback(self, in_data, frame_count, time_info, status):
-        if self.is_recording and not self.is_receiving:
+        if self.is_recording:
             self.queue.put(in_data)
         return (None, pyaudio.paContinue)
 
@@ -41,8 +41,7 @@ class AsyncMicrophone:
 
     def start_receiving(self):
         self.is_receiving = True
-        self.is_recording = False
-        logger.info("Started receiving assistant response")
+        logger.info("Started receiving assistant response (mic stays active)")
 
     def stop_receiving(self):
         self.is_receiving = False

@@ -148,6 +148,14 @@ async def process_ws_messages(websocket, mic, visual_interface):
             elif event_type == "input_audio_buffer.speech_started":
                 logger.info("Speech detected, listening...")
                 visual_interface.set_active(True)
+
+                # Barge-in: cancel assistant response and stop audio if speaking
+                if mic.is_receiving:
+                    logger.info("User interrupted assistant, cancelling response...")
+                    await audio_player.stop_playback_immediate(visual_interface)
+                    cancel_msg = {"type": "response.cancel"}
+                    log_ws_event("outgoing", cancel_msg)
+                    await websocket.send(json.dumps(cancel_msg))
             elif event_type == "input_audio_buffer.speech_stopped":
                 mic.stop_recording()
                 logger.info("Speech ended, processing...")

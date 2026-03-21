@@ -13,7 +13,7 @@ class QueryDatabase(BaseTool):
 
     query: str = Field(
         ...,
-        description="SQL SELECT query to run. Only SELECT statements are allowed. Tables include: ghl_pipeline_deals, ghl_invoices, fx_rates, collection_log, github_commits, github_prs.",
+        description="SQL SELECT query to run. Only SELECT statements are allowed. Tables include: ghl_pipeline_daily (date, pipeline_name, stage_name, count, total_value_gbp), ghl_activity_daily, fx_rates, collection_log, github_daily, github_repos, calendly_daily, calendly_events, xero_daily, gcal_daily, gcal_events, scorecard, meta_ads_daily. Example: SELECT SUM(total_value_gbp) as total FROM ghl_pipeline_daily WHERE date = (SELECT MAX(date) FROM ghl_pipeline_daily)",
     )
 
     async def run(self) -> str:
