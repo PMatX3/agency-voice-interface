@@ -108,6 +108,19 @@ async def process_ws_messages(websocket, mic, visual_interface):
                     log_runtime("realtime_api_response", response_duration)
                     response_start_time = None
 
+                # Debug: log the full response payload
+                response_obj = event.get("response", {})
+                status = response_obj.get("status", "unknown")
+                output = response_obj.get("output", [])
+                usage = response_obj.get("usage", {})
+                status_details = response_obj.get("status_details", {})
+                logger.info(f"Response status: {status}, outputs: {len(output)}, usage: {usage}, status_details: {status_details}")
+                for i, item in enumerate(output):
+                    logger.info(f"  Output[{i}]: type={item.get('type')}, role={item.get('role')}, status={item.get('status')}")
+                    if item.get('content'):
+                        for j, c in enumerate(item['content']):
+                            logger.info(f"    Content[{j}]: type={c.get('type')}, transcript={c.get('transcript', '')[:100]}")
+
                 logger.info("Assistant response complete.")
                 await audio_player.stop_playback(visual_interface)
                 assistant_reply = ""

@@ -43,7 +43,7 @@ async def realtime_api():
 
             exit_event = asyncio.Event()
 
-            url = "wss://api.openai.com/v1/realtime?model=gpt-4o-realtime-preview-2024-10-01"
+            url = "wss://api.openai.com/v1/realtime?model=gpt-4o-mini-realtime-preview"
             headers = {
                 "Authorization": f"Bearer {api_key}",
                 "OpenAI-Beta": "realtime=v1",
