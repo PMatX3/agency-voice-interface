@@ -115,8 +115,7 @@ class GoogleServicesUtils:
             client_id=key_data["client_id"],
             client_secret=key_data["client_secret"],
             scopes=[
-                "https://www.googleapis.com/auth/gmail.readonly",
-                "https://www.googleapis.com/auth/gmail.compose",
+                "https://www.googleapis.com/auth/gmail.modify",
             ],
         )
 
